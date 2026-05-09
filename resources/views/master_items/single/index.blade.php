@@ -23,6 +23,11 @@
                             <td>{{$data->harga_beli}}</td>
                         </tr>
                         <tr>
+                            <th>Foto</th>
+                            <td>:</td>
+                            <td><img src="{{Storage::url($data->foto)}}" alt="{{$data->nama}}" style="max-width: 100px; max-height: 100px;"></td>
+                        </tr>
+                        <tr>
                             <th>Laba</th>
                             <td>:</td>
                             <td>{{$data->laba}}</td>

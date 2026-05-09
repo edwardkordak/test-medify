@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     @csrf
     @if($method == 'edit')
     <div class="form-group">
@@ -10,6 +10,31 @@
     <div class="form-group">
         <label>Nama</label>
         <input type="text" class="form-control" name="nama" required  value="{{$item->nama ?? ''}}">
+    </div>
+
+    <label>Category</label>
+
+    <select name="category_id"
+            class="form-control">
+
+        <option value="">-- Select Category --</option>
+
+        @foreach($categories as $category)
+
+            <option value="{{ $category->id }}"
+                {{ old('category_id', $item->category_id ?? '') == $category->id ? 'selected' : '' }}>
+
+                {{ $category->name }}
+
+            </option>
+
+        @endforeach
+
+    </select>
+
+       <div class="form-group">
+        <label>Foto</label>
+        <input type="file" class="form-control" name="foto" required  value="{{$item->foto ?? ''}}">
     </div>
 
     <div class="form-group">
