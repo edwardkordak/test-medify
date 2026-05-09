@@ -2,68 +2,60 @@
 
 @section('content')
 
-<div class="container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h3>Edit Category</h3>
 
-    <h3>Edit Category</h3>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
 
-    @if ($errors->any())
+                        <ul>
 
-        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
 
-            <ul>
+                        </ul>
 
-                @foreach ($errors->all() as $error)
+                    </div>
+                @endif
 
-                    <li>{{ $error }}</li>
+                <form action="{{ route('categories.update', $category->id) }}" method="POST">
 
-                @endforeach
+                    @csrf
+                    @method('PUT')
 
-            </ul>
+                    <div class="mb-3">
 
-        </div>
+                        <label>Kode</label>
 
-    @endif
+                        <input type="number" name="kode" class="form-control" value="{{ old('kode', $category->kode) }}">
 
-    <form action="{{ route('categories.update', $category->id) }}"
-          method="POST">
+                    </div>
 
-        @csrf
-        @method('PUT')
+                    <div class="mb-3">
 
-        <div class="mb-3">
+                        <label>Name</label>
 
-            <label>Kode</label>
+                        <input type="text" name="name" class="form-control"
+                            value="{{ old('name', $category->name) }}">
 
-            <input type="text"
-                   name="kode"
-                   class="form-control"
-                   value="{{ old('kode', $category->kode) }}">
+                    </div>
 
-        </div>
+                    <button type="submit" class="btn btn-primary">
+                        Update
+                    </button>
 
-        <div class="mb-3">
+                    <a href="{{ route('categories.index') }}" class="btn btn-secondary">
+                        Back
+                    </a>
 
-            <label>Name</label>
+                </form>
 
-            <input type="text"
-                   name="name"
-                   class="form-control"
-                   value="{{ old('name', $category->name) }}">
+            </div>
 
-        </div>
+        @endsection
 
-        <button type="submit"
-                class="btn btn-primary">
-            Update
-        </button>
-
-        <a href="{{ route('categories.index') }}"
-           class="btn btn-secondary">
-            Back
-        </a>
-
-    </form>
-
+    </div>
 </div>
-
-@endsection
